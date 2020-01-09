@@ -22,7 +22,8 @@ class MyApp extends StatelessWidget {
 
             primaryColor: Colors.white,
             primaryColorDark: Colors.white30,
-            accentColor: Colors.blue
+            accentColor: Colors.blue,
+            fontFamily: 'Raleway'
 
         ),
       home: new MyHomePage(title: 'Groceries'),

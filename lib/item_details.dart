@@ -3,17 +3,36 @@ import 'package:bookli_flutter/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 
+class MyButtonModal {
+  final String buttonText;
+  bool changeButtonColor;
+
+  MyButtonModal({this.buttonText, this.changeButtonColor = false});
+}
+
+
+
 class Item_Details extends StatefulWidget {
   @override
   State<StatefulWidget> createState() => item_details();
 }
 
 class item_details extends State<Item_Details> {
+  List<MyButtonModal> yearList = [
+    MyButtonModal(buttonText: "2018"),
+    MyButtonModal(buttonText: "2019"),
+    MyButtonModal(buttonText: "2020"),
+  ];
+  List<MyButtonModal> grade = [
+    MyButtonModal(buttonText: "Good"),
+    MyButtonModal(buttonText: "Bad"),
+   
+  ];
   String toolbarname = 'Computer Engg';
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   List list = ['12', '11'];
-
-  String itemname = 'Advanced Java';
+  bool pressAttention = false;
+  String itemname = 'TechMax';
   int item = 0;
   String itemprice= '\$15';
 
@@ -132,17 +151,14 @@ class item_details extends State<Item_Details> {
 
               child: Column(
               children: <Widget>[
-
-             Card(
-               elevation: 4.0,
-              child:Container(
+                   Container(
                 color: Colors.white,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     // photo and title
                     SizedBox(
-                      height: 250.0,
+                      height: 150.0,
 
                       child: Stack(
                         alignment: Alignment.center,
@@ -188,142 +204,171 @@ class item_details extends State<Item_Details> {
                     ),
                   ]),
             ),
-             ),
+             
 
              Container(
-               padding: const EdgeInsets.fromLTRB(0.0, 16.0, 16.0, 0.0),
+               alignment: Alignment.topLeft,
+               padding: const EdgeInsets.fromLTRB(16.0, 16.0, 0.0, 0.0),
                child: DefaultTextStyle(
                  style: descriptionStyle,
                  child: Column(
                      mainAxisSize: MainAxisSize.max,
-                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                     crossAxisAlignment: CrossAxisAlignment.start,
                      children: <Widget>[
                  // three line description
                  Padding(
                  padding: const EdgeInsets.only(bottom: 8.0),
-                 child: Text(
-                 itemname,
-                 style: descriptionStyle.copyWith(
-                   fontSize: 20.0,
-                 fontWeight: FontWeight.bold,
-                 color: Colors.black87),
-              ),
+                 child: Text(itemname,
+                 style: TextStyle(fontWeight: FontWeight.normal,fontFamily:'Roboto',color: Color(0xff415568).withOpacity(0.5),fontSize: 16.0,letterSpacing: 0.64),
+             ),
              ),
              Padding(
                padding: const EdgeInsets.only(bottom: 8.0),
-               child: Text(
-                 'JAVA',
-                 style: descriptionStyle.copyWith(
-                   fontSize: 20.0,
-                     color: Colors.black54),
-               ),
+               child: Text('Advanced Java',
+                 style: TextStyle(fontWeight: FontWeight.w500,fontFamily:'Roboto',color: Color(0xff415568),fontSize: 26.0,letterSpacing: 0.64),
+             ),
              ),
               ],
             )
         )
              ),
-                Container(
-                  margin: EdgeInsets.all(10.0),
-                  child: Card(
-                      child: Container(
+              Container(
+                margin: EdgeInsets.all(10.0),
+                  child:  Container(
                           padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
                           child: DefaultTextStyle(
-                              style: descriptionStyle,
-                              child: Row(
+                            style: descriptionStyle,
+                              child: Column(
                                 mainAxisSize: MainAxisSize.max,
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
-                                  // three line description
+                                  Text('Select the edition that you want',
+                                   style: TextStyle(fontWeight: FontWeight.normal,fontFamily:'Roboto',color: Color(0xff415568).withOpacity(0.6)),
+                                   ),
+                                  Container(
+                                        padding: EdgeInsets.only(top:8.0),
+                                      ),
                                   Row(
-                                    children: <Widget>[
-                                      new IconButton(
-                                        icon: Icon(_add_icon(),color: Colors.amber.shade500),
-                                        onPressed: () {
-
-                                            item = item + 1;
-
-                                        },
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(left:2.0),
-                                      ),
-                                      Text(
-                                        item.toString(),
-                                        style: descriptionStyle.copyWith(
-                                            fontSize: 20.0,
-                                            color: Colors.black87),
-                                      ),
-                                      Container(
-                                        margin: EdgeInsets.only(right:2.0),
-                                      ),
-                                      new IconButton(
-                                        icon: Icon(_sub_icon(),color: Colors.amber.shade500),
-                                        onPressed: () {
-                                          if(item<0){
-
-                                          }
-                                          else{
-                                            item = item -1;
-                                          }
-                                        },
-                                      ),
-                                    ],
-                                  ),
-
-                                  Padding(
-                                    padding: const EdgeInsets.only(bottom: 8.0),
-                                    child:  Container(
-                                      alignment: Alignment.center,
-                                      child: OutlineButton(
-                                          borderSide: BorderSide(color: Colors.amber.shade500),
-                                          child: const Text('Add'),
-                                          textColor: Colors.amber.shade500,
-                                          onPressed: () {
-                                            Navigator.push(context, MaterialPageRoute(builder: (context)=> Cart_screen()));
-                                          },
-                                          shape: new OutlineInputBorder(
-                                            borderRadius: BorderRadius.circular(30.0),
-                                          )),
+                                    children:yearList.map((MyButtonModal year) {
+                                     return
+                                     Container(
+                                       padding: EdgeInsets.only(right:8.0),
+                                       child :FlatButton(
+                                        color: year.changeButtonColor ?  Color(0xff35B2FE) : Color(0xffF2F9FF) , onPressed: () {
+                                               setState(() => {
+                                                 year.changeButtonColor = !year.changeButtonColor
+                                               });},
+                                        child: Text(year.buttonText)
+                                        ));
+                                     }).toList()
                                     ),
-                                  ),
-                                ],
+                              ],
                               )
                           )
                       )
-                  )
+                  
                 ),
-
-             Container(
-                 padding: const EdgeInsets.fromLTRB(16.0, 16.0, 16.0, 0.0),
-                 child: DefaultTextStyle(
-                     style: descriptionStyle,
-                     child: Row(
-                       mainAxisSize: MainAxisSize.max,
-                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                       children: <Widget>[
-                         // three line description
-                         Padding(
-                           padding: const EdgeInsets.only(bottom: 8.0),
-                           child: Text(
-                             'Details',
-                             style: descriptionStyle.copyWith(
-                                 fontSize: 20.0,
-                                 fontWeight: FontWeight.bold,
-                                 color: Colors.black87),
-                           ),
-                         ),
-                       ],
-                     )
-                 )
-             ),
-             Container(
-                 padding: const EdgeInsets.fromLTRB(20.0, 10.0, 10.0, 0.0),
-
-                          child: Text("Grocery stores also offer non-perishable foods that are packaged in bottles, boxes, and cans; some also have bakeries, butchers, delis, and fresh produce. Large grocery stores that stock significant amounts of non-food products, such as clothing and household items, are called supermarkets. Some large supermarkets also include a pharmacy, and customer service, redemption, and electronics sections.",
-                            maxLines: 10,
-                            style: TextStyle(fontSize: 13.0,color: Colors.black38)
+              Container(
+                margin: EdgeInsets.all(10.0),
+                  child: Container(
+                          padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
+                          child: DefaultTextStyle(
+                            style: descriptionStyle,
+                              child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  Text('Select the quality you wish',
+                                   style: TextStyle(fontWeight: FontWeight.normal,fontFamily:'Roboto',color: Color(0xff415568).withOpacity(0.6)),
+                                   ),
+                                  Container(
+                                        padding: EdgeInsets.only(top:8.0),
+                                      ),
+                                  Row(
+                                    children:grade.map((MyButtonModal year) {
+                                     return
+                                     Container(
+                                       padding: EdgeInsets.only(right:8.0),
+                                       child: FlatButton(
+                                        color: year.changeButtonColor ?  Color(0xff35B2FE) : Color(0xffF2F9FF) , onPressed: () {
+                                               setState(() => {
+                                                 year.changeButtonColor = !year.changeButtonColor
+                                               });},
+                                        child: Text(year.buttonText)
+                                        ));
+                                     }).toList()
+                                  ),
+                              ],
+                              )
                           )
+                      )
+                  
+                ),
+               Container(
+                  alignment: Alignment.center,
+                  child: Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: <Widget>[
+                                  Row(
+                                     mainAxisSize: MainAxisSize.max,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                    children: <Widget>[
+                                       Text('20% off',
+                                   style: TextStyle(fontWeight: FontWeight.w500,fontFamily:'Roboto',color: Color(0xff28B446),fontSize: 12.0),
+                                   ),
+                                   Padding(padding: EdgeInsets.only(left: 4.0),),
+                                     Text('₹200',
+                                   style: TextStyle(fontWeight: FontWeight.w500,fontFamily:'Roboto',color: Color(0xff415568).withOpacity(0.5),fontSize: 16.0)),
+                                   
+                                   ]
+                                  ),
+                                  Text('₹160',
+                                   style: TextStyle(fontWeight: FontWeight.w500,fontFamily:'Roboto',color: Color(0xff415568),fontSize: 34.0),
+                                   ),
+                                ],
+                              )
+                          ),
+                          Padding(padding: EdgeInsets.only(top: 12.0),),
+              Row(
+                children: <Widget>[
+                    DefaultTextStyle(
+                     style: descriptionStyle,
+                     child:Container(  
+                     decoration: BoxDecoration(
+                       gradient: LinearGradient(
+                        begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+          // Add one stop for each color. Stops should increase from 0 to 1
+          stops: [0.1, 0.5, 0.7, 0.9],
+          colors: [
+            // Colors are easy thanks to Flutter's Colors class.
+            Colors.blue[800],
+            Colors.blue[700],
+            Colors.blue[600],
+            Colors.blue[400],
+          ]
+                       )
+                     ),
+          child:ButtonTheme(
+                           minWidth: 375.0,
+                           height: 80.0,
+                          child:FlatButton(
+                         onPressed: () {
+                         setState(() => {});
+                       },
+                      child: 
+                        Text('Add to bag',
+                                   style: TextStyle(fontWeight: FontWeight.bold,fontFamily:'Roboto',color: Color(0xffFFFFFF),fontSize: 16.0,letterSpacing: 0.64),
+                                   ),
+                  
+                        )  
+                         )
+                 )
+                    )]
+                    
              ),
+            
 
     ]
     )
