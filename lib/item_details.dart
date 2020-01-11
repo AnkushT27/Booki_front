@@ -2,7 +2,7 @@ import 'package:bookli_flutter/Cart_Screen.dart';
 import 'package:bookli_flutter/checkout_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
-
+import 'package:carousel_slider/carousel_slider.dart';
 class MyButtonModal {
   final String buttonText;
   bool changeButtonColor;
@@ -145,7 +145,7 @@ class item_details extends State<Item_Details> {
           ],
         ),
         body: Container(
-            padding: const EdgeInsets.all(8.0),
+            padding: const EdgeInsets.all(2.0),
 
             child:SingleChildScrollView(
 
@@ -158,64 +158,37 @@ class item_details extends State<Item_Details> {
                   children: <Widget>[
                     // photo and title
                     SizedBox(
-                      height: 150.0,
-
-                      child: Stack(
+                      height: 500.0,
+                     child: Stack(
                         alignment: Alignment.center,
 
                         children: <Widget>[
                           new Container(
-                            child: new Carousel(
-                              images: [
-                                new AssetImage(
-                                  'images/apple.jpg',
-                                  // package: destination.assetPackage,
-                                ),
-                                new AssetImage(
-                                  'images/tomato.jpg',
-                                  // package: destination.assetPackage,
-                                ),
-                                new AssetImage(
-                                  'images/lemons.jpg',
-                                  // package: destination.assetPackage,
-                                ),
-                                new AssetImage(
-                                  'images/kiwi.jpg',
-                                  // package: destination.assetPackage,
-                                ),
-                                new AssetImage(
-                                  'images/guava.jpg',
-                                  // package: destination.assetPackage,
-                                ),
-                                new AssetImage(
-                                  'images/grapes.jpg',
-                                  // package: destination.assetPackage,
-                                ),
-                              ],
-                              boxFit: BoxFit.scaleDown,
-                              showIndicator: false,
-
-                              autoplay: false,
-                            ),
-                          )
-                        ],
-                      ),
-
-                    ),
-                  ]),
-            ),
-             
-
-             Container(
-               alignment: Alignment.topLeft,
-               padding: const EdgeInsets.fromLTRB(16.0, 16.0, 0.0, 0.0),
+                            child: new CarouselSlider(
+                                height: MediaQuery.of(context).size.height,
+                          items: [1,2,3,4,5].map((i) {
+                            return Builder(
+                            builder: (BuildContext context) {
+                                  return Container(
+                                  width: MediaQuery.of(context).size.width,
+                                 
+                                  decoration: BoxDecoration(
+                                 ),
+          child: 
+            Container(
+              alignment: Alignment.topLeft,
+               padding: const EdgeInsets.fromLTRB(6.0, 16.0, 0.0, 0.0),
                child: DefaultTextStyle(
                  style: descriptionStyle,
                  child: Column(
                      mainAxisSize: MainAxisSize.max,
                      crossAxisAlignment: CrossAxisAlignment.start,
                      children: <Widget>[
+         
+          Container(
+              child: Column( 
                  // three line description
+                  children: <Widget>[
                  Padding(
                  padding: const EdgeInsets.only(bottom: 8.0),
                  child: Text(itemname,
@@ -228,14 +201,10 @@ class item_details extends State<Item_Details> {
                  style: TextStyle(fontWeight: FontWeight.w500,fontFamily:'Roboto',color: Color(0xff415568),fontSize: 26.0,letterSpacing: 0.64),
              ),
              ),
-              ],
-            )
-        )
-             ),
+
               Container(
-                margin: EdgeInsets.all(10.0),
-                  child:  Container(
-                          padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
+               child:  Container(
+                          padding: const EdgeInsets.fromLTRB(0.0, 20.0, 10.0, 20.0),
                           child: DefaultTextStyle(
                             style: descriptionStyle,
                               child: Column(
@@ -249,6 +218,8 @@ class item_details extends State<Item_Details> {
                                         padding: EdgeInsets.only(top:8.0),
                                       ),
                                   Row(
+                                    mainAxisSize: MainAxisSize.max,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children:yearList.map((MyButtonModal year) {
                                      return
                                      Container(
@@ -268,10 +239,10 @@ class item_details extends State<Item_Details> {
                       )
                   
                 ),
-              Container(
-                margin: EdgeInsets.all(10.0),
+   Container(
+                
                   child: Container(
-                          padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
+                           padding: const EdgeInsets.fromLTRB(0.0, 20.0, 10.0, 20.0),
                           child: DefaultTextStyle(
                             style: descriptionStyle,
                               child: Column(
@@ -304,6 +275,29 @@ class item_details extends State<Item_Details> {
                       )
                   
                 ),
+              ],
+            )
+        )
+                     ]),
+        )
+                     
+            )
+                                  )                         
+      },
+    );
+  }).toList(),
+)
+                 )
+                        ],
+                      ),
+
+                    ),
+                  ]),
+            ),
+             
+
+            
+           
                Container(
                   alignment: Alignment.center,
                   child: Column(
