@@ -95,7 +95,7 @@ class item_details extends State<Item_Details> {
             new Padding(
               padding: const EdgeInsets.all(10.0),
               child: new Container(
-                height: 150.0,
+                height: 20.0,
                 width: 30.0,
                 child: new GestureDetector(
                   onTap: () {
@@ -158,7 +158,7 @@ class item_details extends State<Item_Details> {
                   children: <Widget>[
                     // photo and title
                     SizedBox(
-                      height: 500.0,
+                      height: 550.0,
                      child: Stack(
                         alignment: Alignment.center,
 
@@ -177,7 +177,7 @@ class item_details extends State<Item_Details> {
           child: 
             Container(
               alignment: Alignment.topLeft,
-               padding: const EdgeInsets.fromLTRB(6.0, 16.0, 0.0, 0.0),
+               padding: const EdgeInsets.fromLTRB(6.0, 0.0, 0.0, 0.0),
                child: DefaultTextStyle(
                  style: descriptionStyle,
                  child: Column(
@@ -189,8 +189,19 @@ class item_details extends State<Item_Details> {
               child: Column( 
                  // three line description
                   children: <Widget>[
-                 Padding(
+                      Padding(
                  padding: const EdgeInsets.only(bottom: 8.0),
+                 child: Container(
+                        constraints: BoxConstraints.expand(height: 274,width: 274),
+                         child:Image.asset(
+                          'images/adv_java.png',
+                          // package: destination.assetPackage,
+                         fit: BoxFit.contain,
+                        )
+                 )
+             ),
+               Padding(
+                 padding: const EdgeInsets.only(bottom: 2.0),
                  child: Text(itemname,
                  style: TextStyle(fontWeight: FontWeight.normal,fontFamily:'Roboto',color: Color(0xff415568).withOpacity(0.5),fontSize: 16.0,letterSpacing: 0.64),
              ),
@@ -242,7 +253,7 @@ class item_details extends State<Item_Details> {
    Container(
                 
                   child: Container(
-                           padding: const EdgeInsets.fromLTRB(0.0, 20.0, 10.0, 20.0),
+                           padding: const EdgeInsets.fromLTRB(0.0, 10.0, 10.0, 9.0),
                           child: DefaultTextStyle(
                             style: descriptionStyle,
                               child: Column(
@@ -282,7 +293,7 @@ class item_details extends State<Item_Details> {
         )
                      
             )
-                                  )                         
+                                  );                         
       },
     );
   }).toList(),
@@ -323,12 +334,16 @@ class item_details extends State<Item_Details> {
                                 ],
                               )
                           ),
-                          Padding(padding: EdgeInsets.only(top: 12.0),),
+                          Padding(padding: EdgeInsets.only(bottom: 15.0),),
               Row(
                 children: <Widget>[
                     DefaultTextStyle(
                      style: descriptionStyle,
-                     child:Container(  
+                     child:
+                     Expanded(
+          child: Align(
+            alignment: FractionalOffset.bottomCenter,
+                child:     Container(  
                      decoration: BoxDecoration(
                        gradient: LinearGradient(
                         begin: Alignment.topRight,
@@ -345,8 +360,8 @@ class item_details extends State<Item_Details> {
                        )
                      ),
           child:ButtonTheme(
-                           minWidth: 375.0,
-                           height: 80.0,
+                           minWidth: double.infinity,
+                           height: 20.0,
                           child:FlatButton(
                          onPressed: () {
                          setState(() => {});
@@ -359,7 +374,10 @@ class item_details extends State<Item_Details> {
                         )  
                          )
                  )
-                    )]
+                    )
+                    )
+                    )
+                    ]
                     
              ),
             
